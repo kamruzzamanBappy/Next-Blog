@@ -1,8 +1,52 @@
+"use client"
+import { signIn } from 'next-auth/react';
+import styles from './page.module.css';
+const Login = () => {
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    const name = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+  
+    try{
+const res = await fetch("/api/auth/register",{
 
-const login = () => {
+  method: "POST",
+  headers:{
+    "Content-Type": "applicatin/json"
+  },
+
+  body: JSON.stringify({
+name,email,password,
+  }),
+
+});
+res.status === 201 && router.push("/dashboard/login?success=Account has been created")
+    }
+    catch(err){
+setErr(true);
+    }
+  
+  };
+
+
+
   return (
-    <div>login</div>
-  )
-}
+    <div className={styles.container}>
 
-export default login
+<form className={styles.form} onSubmit={handleSubmit} >
+<input type="text" placeholder='username' className={styles.input} />
+<input type="email" placeholder='email' className={styles.input} />
+ <input type="password" placeholder='password' className={styles.input} required/>
+  
+ <button className={styles.button}>Login</button>
+      </form>
+
+
+<button onClick={() => signIn("github")}>Login With Github</button>
+
+    </div>
+  );
+};
+
+export default Login;

@@ -1,6 +1,7 @@
 "use client"
-
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 import styles from './navbar.module.css';
 const links =[
 {
@@ -33,18 +34,17 @@ url:"/"
     id:6,
     title: "Dashboard",
     url:"/dashboard"
-
- }
-                            
+ }                           
 ]
-
-
 
 const Navbar = () => {
   return (
     <div className={styles.container}>
 <Link href="/" className={styles.logo}>OceanX</Link>
-<div className={styles.links}>{links.map((link)=>(
+<div className={styles.links}>
+    <DarkModeToggle />
+    
+    {links.map((link)=>(
     <Link key={link.id} href={link.url} className={styles.link}>
         {link.title}
         </Link>
@@ -52,9 +52,7 @@ const Navbar = () => {
 
 <button
 className={styles.logout}
-onClick={() =>{
-    console.log("logged out");
-}}>
+onClick={signOut}>
     Logout
 </button>
 

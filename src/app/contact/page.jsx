@@ -2,6 +2,13 @@
 import Image from 'next/image'
 import Button from '../components/button/Button'
 import styles from './page.module.css'
+
+export const metadata = {
+  title: 'OceanX Contact Info',
+  description: 'This is Contact Page',
+}
+
+
 const Contact = () => {
   return (
     <div className={styles.container}>
